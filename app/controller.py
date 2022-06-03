@@ -34,7 +34,7 @@ def path_changer(path):
     return new_path
 
 
-def list_author(authors):
+def list_author(authors, limit=True):
     """return author name under each paper"""
     names = []
     count = 0
@@ -50,7 +50,7 @@ def list_author(authors):
                 name += mid
         if len(author['last'])!=0: name = name + ' ' + author['last'] 
         if len(name)!= 0: names.append(name) 
-        if count >= 5:
+        if limit and count >= 5:
             break
     return names
 
@@ -64,7 +64,7 @@ def slice_result(results, page_num, per_page_num):
 
 def get_full_paper(uid):
     result = meta_data[uid]
-    result['authors'] = list_author(result['authors'])
+    result['authors'] = list_author(result['authors'], limit=False)
     return result
 
 
